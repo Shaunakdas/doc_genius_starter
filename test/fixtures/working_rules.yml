@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  code: MyString
+  sequence: 1
+  question_text: MyString
+  game_holder: one
+  difficulty_level: one
+
+two:
+  name: MyString
+  code: MyString
+  sequence: 1
+  question_text: MyString
+  game_holder: two
+  difficulty_level: two

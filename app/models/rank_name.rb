@@ -1,0 +1,2 @@
+class RankName < ApplicationRecord
+end

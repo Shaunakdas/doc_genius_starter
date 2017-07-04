@@ -58,6 +58,7 @@ bundle exec rails runner "eval(File.read 'your_script.rb')"
 * Database creation
 
 ** Database initialization
+* [MOdel generate with project with duplicate name](https://stackoverflow.com/a/31857620)
 * [Adding Mysql gem to Exisitng Rails App](https://teamtreehouse.com/community/how-do-i-install-the-mysql-gem-and-how-do-i-set-it-as-the-default-database-for-rails) - Adding Mysql gem in Rails when Mysql is already installed
 * [MySQL ERROR 2002 (HY000)](https://stackoverflow.com/a/43407957) - When Mysql gives this error. Stop and Restart server.
 * [Polymorphic field]

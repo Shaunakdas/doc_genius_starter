@@ -14,6 +14,7 @@ Things covered:
 * [Restarting already existing running server](https://stackoverflow.com/questions/15072846/server-is-already-running-in-rails)
 * [Rolling back a failed Rails migration](https://stackoverflow.com/a/5466779)
 * [Self Join/Making Tree of model](http://guides.rubyonrails.org/association_basics.html#self-joins) When a model want to reference itself.
+*[Rake Tasks](https://www.tutorialspoint.com/ruby-on-rails/rails-and-rake.htm) List of Rake tasks.
 * Ruby version
 2.3.0
 
@@ -45,6 +46,7 @@ namespace :api, :defaults => {:format => :json} do
   end
 ```
 Now you can see the new api on [http://localhost:3000/api/analytics/get_analytics](http://localhost:3000/api/analytics/get_analytics)
+[Authenticate_user bug](https://github.com/plataformatec/devise/issues/4207)
 
 * Execute file in Rails console
 

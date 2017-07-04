@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  percentile_count: 1
+  score: 9.99
+  acad_entity: one
+  acad_entity_type: Acad entity
+  region: one
+
+two:
+  percentile_count: 1
+  score: 9.99
+  acad_entity: two
+  acad_entity_type: Acad entity
+  region: two

@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170704153823) do
+ActiveRecord::Schema.define(version: 20170704155256) do
+
+  create_table "acad_entity_scores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.decimal  "average_value",    precision: 10
+    t.decimal  "max_value",        precision: 10
+    t.decimal  "last_value",       precision: 10
+    t.decimal  "time_spent",       precision: 10
+    t.integer  "passed_count"
+    t.integer  "failed_count"
+    t.integer  "seen_count"
+    t.decimal  "percentile",       precision: 10
+    t.string   "acad_entity_type"
+    t.integer  "acad_entity_id"
+    t.integer  "attempt_score_id"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.index ["acad_entity_type", "acad_entity_id"], name: "index_acad_entity_scores_on_acad_entity_type_and_acad_entity_id", using: :btree
+    t.index ["attempt_score_id"], name: "index_acad_entity_scores_on_attempt_score_id", using: :btree
+  end
 
   create_table "answer_options", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "text"
@@ -19,6 +37,33 @@ ActiveRecord::Schema.define(version: 20170704153823) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.index ["word_question_id"], name: "index_answer_options_on_word_question_id", using: :btree
+  end
+
+  create_table "attempt_scores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.decimal  "value",           precision: 10
+    t.decimal  "time_taken",      precision: 10
+    t.integer  "correct_count"
+    t.integer  "incorrect_count"
+    t.boolean  "seen"
+    t.boolean  "passed"
+    t.boolean  "failed"
+    t.integer  "game_attempt_id"
+    t.integer  "game_holder_id"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.index ["game_attempt_id"], name: "index_attempt_scores_on_game_attempt_id", using: :btree
+    t.index ["game_holder_id"], name: "index_attempt_scores_on_game_holder_id", using: :btree
+  end
+
+  create_table "auth_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "number"
+    t.string   "auth_token"
+    t.integer  "otp"
+    t.string   "device_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_auth_tokens_on_user_id", using: :btree
   end
 
   create_table "auto_questions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -60,6 +105,18 @@ ActiveRecord::Schema.define(version: 20170704153823) do
     t.integer  "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "game_attempts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "game_type"
+    t.integer  "game_id"
+    t.integer  "game_session_id"
+    t.integer  "user_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["game_session_id"], name: "index_game_attempts_on_game_session_id", using: :btree
+    t.index ["game_type", "game_id"], name: "index_game_attempts_on_game_type_and_game_id", using: :btree
+    t.index ["user_id"], name: "index_game_attempts_on_user_id", using: :btree
   end
 
   create_table "game_holders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -122,6 +179,28 @@ ActiveRecord::Schema.define(version: 20170704153823) do
     t.datetime "updated_at",   null: false
   end
 
+  create_table "region_percentile_scores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "percentile_count"
+    t.decimal  "score",            precision: 10
+    t.string   "acad_entity_type"
+    t.integer  "acad_entity_id"
+    t.integer  "region_id"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.index ["acad_entity_type", "acad_entity_id"], name: "index_region_percentile_scores_on_acad_entity", using: :btree
+    t.index ["region_id"], name: "index_region_percentile_scores_on_region_id", using: :btree
+  end
+
+  create_table "regions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "code"
+    t.string   "display_text"
+    t.string   "region_type"
+    t.integer  "parent_region_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["parent_region_id"], name: "index_regions_on_parent_region_id", using: :btree
+  end
+
   create_table "standards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "code"
@@ -167,6 +246,54 @@ ActiveRecord::Schema.define(version: 20170704153823) do
     t.index ["chapter_id"], name: "index_topics_on_chapter_id", using: :btree
   end
 
+  create_table "user_acad_profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "acad_entity_type"
+    t.integer  "acad_entity_id"
+    t.integer  "user_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["acad_entity_type", "acad_entity_id"], name: "index_user_acad_profiles_on_acad_entity_type_and_acad_entity_id", using: :btree
+    t.index ["user_id"], name: "index_user_acad_profiles_on_user_id", using: :btree
+  end
+
+  create_table "user_phone_numbers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "number"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_phone_numbers_on_user_id", using: :btree
+  end
+
+  create_table "user_regions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.date     "registration_date"
+    t.integer  "user_id"
+    t.integer  "region_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["region_id"], name: "index_user_regions_on_region_id", using: :btree
+    t.index ["user_id"], name: "index_user_regions_on_user_id", using: :btree
+  end
+
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "encrypted_password"
+    t.string   "reset_password_token"
+    t.date     "reset_password_sent_at"
+    t.integer  "sign_in_count"
+    t.date     "current_sign_in_at"
+    t.date     "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.date     "remember_created_at"
+    t.string   "confirmation_token"
+    t.date     "confirmed_at"
+    t.date     "confirmation_sent_at"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "word_questions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "text"
     t.string   "hint"
@@ -194,10 +321,16 @@ ActiveRecord::Schema.define(version: 20170704153823) do
     t.index ["game_holder_id"], name: "index_working_rules_on_game_holder_id", using: :btree
   end
 
+  add_foreign_key "acad_entity_scores", "attempt_scores"
   add_foreign_key "answer_options", "word_questions"
+  add_foreign_key "attempt_scores", "game_attempts"
+  add_foreign_key "attempt_scores", "game_holders"
+  add_foreign_key "auth_tokens", "users"
   add_foreign_key "auto_questions", "question_types"
   add_foreign_key "chapters", "streams"
   add_foreign_key "chapters", "subjects"
+  add_foreign_key "game_attempts", "game_sessions"
+  add_foreign_key "game_attempts", "users"
   add_foreign_key "game_holders", "question_types"
   add_foreign_key "game_holders", "rank_names"
   add_foreign_key "game_sessions", "game_holders"
@@ -205,9 +338,14 @@ ActiveRecord::Schema.define(version: 20170704153823) do
   add_foreign_key "practice_questions", "difficulty_levels"
   add_foreign_key "practice_questions", "game_holders"
   add_foreign_key "question_types", "sub_topics"
+  add_foreign_key "region_percentile_scores", "regions"
   add_foreign_key "streams", "subjects"
   add_foreign_key "sub_topics", "topics"
   add_foreign_key "topics", "chapters"
+  add_foreign_key "user_acad_profiles", "users"
+  add_foreign_key "user_phone_numbers", "users"
+  add_foreign_key "user_regions", "regions"
+  add_foreign_key "user_regions", "users"
   add_foreign_key "word_questions", "difficulty_levels"
   add_foreign_key "word_questions", "game_holders"
   add_foreign_key "working_rules", "difficulty_levels"

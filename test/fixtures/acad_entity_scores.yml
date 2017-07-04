@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  average_value: 9.99
+  max_value: 9.99
+  last_value: 9.99
+  time_spent: 9.99
+  passed_count: 1
+  failed_count: 1
+  seen_count: 1
+  percentile: 9.99
+  acad_entity: one
+  acad_entity_type: Acad entity
+  attempt_score: one
+
+two:
+  average_value: 9.99
+  max_value: 9.99
+  last_value: 9.99
+  time_spent: 9.99
+  passed_count: 1
+  failed_count: 1
+  seen_count: 1
+  percentile: 9.99
+  acad_entity: two
+  acad_entity_type: Acad entity
+  attempt_score: two

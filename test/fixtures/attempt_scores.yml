@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  value: 9.99
+  time_taken: 9.99
+  correct_count: 1
+  incorrect_count: 1
+  seen: false
+  passed: false
+  failed: false
+  game_attempt: one
+  game_holder: one
+
+two:
+  value: 9.99
+  time_taken: 9.99
+  correct_count: 1
+  incorrect_count: 1
+  seen: false
+  passed: false
+  failed: false
+  game_attempt: two
+  game_holder: two

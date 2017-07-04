@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyString
+  display_text: MyString
+  region_type: MyString
+  parent_region: one
+
+two:
+  code: MyString
+  display_text: MyString
+  region_type: MyString
+  parent_region: two

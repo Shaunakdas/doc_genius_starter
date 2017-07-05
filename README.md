@@ -14,7 +14,8 @@ Things covered:
 * [Restarting already existing running server](https://stackoverflow.com/questions/15072846/server-is-already-running-in-rails)
 * [Rolling back a failed Rails migration](https://stackoverflow.com/a/5466779)
 * [Self Join/Making Tree of model](http://guides.rubyonrails.org/association_basics.html#self-joins) When a model want to reference itself.
-*[Rake Tasks](https://www.tutorialspoint.com/ruby-on-rails/rails-and-rake.htm) List of Rake tasks.
+* [Rake Tasks](https://www.tutorialspoint.com/ruby-on-rails/rails-and-rake.htm) List of Rake tasks.
+* [Copy file to remote](https://stackoverflow.com/a/20943748) How to handle Permission denied(publickey) issue while scp
 * Ruby version
 2.3.0
 
@@ -60,10 +61,11 @@ bundle exec rails runner "eval(File.read 'your_script.rb')"
 * Database creation
 
 ** Database initialization
-* [MOdel generate with project with duplicate name](https://stackoverflow.com/a/31857620)
+* [Model generate with project with duplicate name](https://stackoverflow.com/a/31857620)
 * [Adding Mysql gem to Exisitng Rails App](https://teamtreehouse.com/community/how-do-i-install-the-mysql-gem-and-how-do-i-set-it-as-the-default-database-for-rails) - Adding Mysql gem in Rails when Mysql is already installed
 * [MySQL ERROR 2002 (HY000)](https://stackoverflow.com/a/43407957) - When Mysql gives this error. Stop and Restart server.
 * [Polymorphic field]
+* [Mysqldump](https://stackoverflow.com/a/21302721)
 ```
 rails generate scaffold UserEntityScore entity:references{polymorphic}:index 
 ``` 
@@ -75,6 +77,10 @@ stream = Stream.find_or_create_by(:name => stream_name,:subject => subject)
 ```
 user_breakup = UserBreakup.where(:ref_field_1 => ref_object_1, :ref_field_2 =>ref_object_2).first
 user_breakup = UserBreakup.create(:ref_field_1 => ref_object_1, :ref_field_2 =>ref_object_2,:value_field_1 => 0, :value_field_1 => 0) if not user_breakup
+```
+* [Update column attribute]
+```
+difficulty_breakup.update_column(:count, existing_breakup)  
 ```
 
 ** Migration
@@ -91,3 +97,4 @@ change_column :table_name, :field_name, :decimal, :precision => 10, :scale => 2
 * Services (job queues, cache servers, search engines, etc.)
 
 * Deployment instructions
+* [Deploy Rails to AWS](https://www.sitepoint.com/deploy-your-rails-app-to-aws/) 

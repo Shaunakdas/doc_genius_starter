@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170704155256) do
+ActiveRecord::Schema.define(version: 20170705111900) do
 
   create_table "acad_entity_scores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.decimal  "average_value",    precision: 10
@@ -61,9 +61,11 @@ ActiveRecord::Schema.define(version: 20170704155256) do
     t.integer  "otp"
     t.string   "device_id"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "user_phone_number_id"
     t.index ["user_id"], name: "index_auth_tokens_on_user_id", using: :btree
+    t.index ["user_phone_number_id"], name: "index_auth_tokens_on_user_phone_number_id", using: :btree
   end
 
   create_table "auto_questions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -325,6 +327,7 @@ ActiveRecord::Schema.define(version: 20170704155256) do
   add_foreign_key "answer_options", "word_questions"
   add_foreign_key "attempt_scores", "game_attempts"
   add_foreign_key "attempt_scores", "game_holders"
+  add_foreign_key "auth_tokens", "user_phone_numbers"
   add_foreign_key "auth_tokens", "users"
   add_foreign_key "auto_questions", "question_types"
   add_foreign_key "chapters", "streams"

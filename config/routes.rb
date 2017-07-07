@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   namespace :api, :defaults => {:format => :json} do  
     resources :login  do 
       collection do
-        post   :user_data
+        get   :user_data_trial
+        post  :user_data
         post  :otp_check
       end
     end

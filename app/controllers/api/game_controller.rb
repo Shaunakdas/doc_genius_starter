@@ -60,6 +60,21 @@ class Api::GameController < ApiController
 		end
 	    render json: response.to_json, status: 200
 	end
+	def list_trial
+		# TODO
+		# Return Standard Object 
+		standard_obj={}
+		GameHolder.all.each do |game_holder|
+			game_holder_obj={}
+			game_holder_obj["code"]=game_holder.code
+			game_holder_obj["name"]=game_holder.name
+			game_holder_obj["sequence"]=game_holder.sequence
+			game_holder_obj["image_url"]=game_holder.image_url
+			game_holder_obj["rank_name"]=RankName.where(id => game_holder.rank_name_id).first.name
+			standard_obj["game_holder_list"] << game_holder_obj
+		end
+	    render json: response.to_json, status: 200
+	end
 	def intro
 		# TODO
 		# Find User based on user_id

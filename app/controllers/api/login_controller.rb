@@ -31,6 +31,19 @@ class Api::LoginController < ApiController
 		response["user_id"] = user.id
 	    render json: response.to_json, status: 200
 	end
+	def user_data_trial
+		name = params[:name]
+		email = params[:email]
+		# TODO
+		# Find Or Create User based on name, email, oauth
+		user = User.where(:email => email).first
+		if not user
+			user = User.create(:name => name,:email => email) 
+		end
+		response ={}
+		response["user_id"] = user.id
+	    render json: response.to_json, status: 200
+	end
 	def otp_check
 		otp = params[:otp]
 		number = params[:number]

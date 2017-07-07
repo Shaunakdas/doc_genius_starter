@@ -90,7 +90,8 @@ difficulty_breakup.update_column(:count, existing_breakup)
 ```
 change_column :table_name, :field_name, :decimal, :precision => 10, :scale => 2
 ```
-
+* Git Issues
+* [Removing git folder inside another git folder](https://stackoverflow.com/a/22013258)
 
 * How to run the test suite
 
